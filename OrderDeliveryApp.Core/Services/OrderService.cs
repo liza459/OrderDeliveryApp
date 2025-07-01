@@ -13,28 +13,28 @@ public class OrderService : IOrderService
 		_orderRepository = orderRepository;
 	}
 
-	public async Task<IEnumerable<Order>> GetAllOrdersAsync()
+	public async Task<IEnumerable<Order>> GetAllOrdersAsync(CancellationToken cancellationToken)
 	{
-		return await _orderRepository.GetAllAsync();
+		return await _orderRepository.GetAllAsync(cancellationToken);
 	}
 
-	public async Task<Order> GetOrderByIdAsync(Guid id)
+	public async Task<Order> GetOrderByIdAsync(Guid id, CancellationToken cancellationToken)
 	{
-		return await _orderRepository.GetByIdAsync(id);
+		return await _orderRepository.GetByIdAsync(id, cancellationToken);
 	}
 
-	public async Task<Order> CreateOrderAsync(Order order)
+	public async Task<Order> CreateOrderAsync(Order order, CancellationToken cancellationToken)
 	{
 		int newOrderNumber;
 		do
 		{
 			newOrderNumber = _random.Next(100000, 1000000);
-		} while (!await _orderRepository.IsOrderNumberUniqueAsync(newOrderNumber));
+		} while (!await _orderRepository.IsOrderNumberUniqueAsync(newOrderNumber, cancellationToken));
 
 		order.OrderNumber = newOrderNumber;
 		order.Id = Guid.NewGuid();
 
-		await _orderRepository.AddAsync(order);
+		await _orderRepository.AddAsync(order, cancellationToken);
 		return order;
 	}
 }

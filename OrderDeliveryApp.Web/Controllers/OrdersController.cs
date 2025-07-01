@@ -14,16 +14,16 @@ public class OrdersController : Controller
 	}
 
 	// GET: Orders
-	public async Task<IActionResult> Index()
+	public async Task<IActionResult> Index(CancellationToken cancellationToken)
 	{
-		var orders = await _orderService.GetAllOrdersAsync();
+		var orders = await _orderService.GetAllOrdersAsync(cancellationToken);
 		return View(orders);
 	}
 
 	// GET: Orders/Details
-	public async Task<IActionResult> Details(Guid id)
+	public async Task<IActionResult> Details(Guid id, CancellationToken cancellationToken)
 	{
-		var order = await _orderService.GetOrderByIdAsync(id);
+		var order = await _orderService.GetOrderByIdAsync(id, cancellationToken);
 		if (order == null)
 		{
 			return NotFound();
@@ -32,18 +32,18 @@ public class OrdersController : Controller
 	}
 
 	// GET: Orders/Create
-	public IActionResult Create()
+	public IActionResult Create(CancellationToken cancellationToken)
 	{
 		return View();
 	}
 
 	// POST: Orders/Create
 	[HttpPost]
-	public async Task<IActionResult> Create([Bind("SenderCity,SenderAddress,ReceiverCity,ReceiverAddress,Weight,PickupDate")] Order order)
+	public async Task<IActionResult> Create([Bind("SenderCity,SenderAddress,ReceiverCity,ReceiverAddress,Weight,PickupDate")] Order order, CancellationToken cancellationToken)
 	{
 		if (ModelState.IsValid)
 		{
-			await _orderService.CreateOrderAsync(order);
+			await _orderService.CreateOrderAsync(order, cancellationToken);
 			return RedirectToAction(nameof(Details), new { id = order.Id });
 		}
 

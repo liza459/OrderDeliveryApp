@@ -1,0 +1,36 @@
+﻿@model IEnumerable<OrderDeliveryApp.Core.Models.Order>
+
+<h2>Список заказов</h2>
+
+<p>
+    <a asp-action="Create">Создать новый заказ</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Номер заказа</th>
+            <th>Город отправителя</th>
+            <th>Город получателя</th>
+            <th>Вес груза</th>
+            <th>Дата забора</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.Id">@item.OrderNumber</a>
+                </td>
+                <td>@item.SenderCity</td>
+                <td>@item.ReceiverCity</td>
+                <td>@item.Weight</td>
+                <td>@item.PickupDate.ToShortDateString()</td>
+                <td>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

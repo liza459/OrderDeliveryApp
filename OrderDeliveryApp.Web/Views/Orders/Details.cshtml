@@ -1,0 +1,59 @@
+﻿@model OrderDeliveryApp.Core.Models.Order
+
+@{
+    ViewData["Title"] = "Детали заказа";
+}
+
+<h2>@ViewData["Title"]: @Html.DisplayFor(model => model.OrderNumber)</h2>
+
+<div>
+    <h4>Информация о заказе</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-3">
+            @Html.DisplayNameFor(model => model.OrderNumber)
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.OrderNumber)
+        </dd>
+        <dt class="col-sm-3">
+            @Html.DisplayNameFor(model => model.SenderCity)
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.SenderCity)
+        </dd>
+        <dt class="col-sm-3">
+            @Html.DisplayNameFor(model => model.SenderAddress)
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.SenderAddress)
+        </dd>
+        <dt class="col-sm-3">
+            @Html.DisplayNameFor(model => model.ReceiverCity)
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.ReceiverCity)
+        </dd>
+        <dt class="col-sm-3">
+            @Html.DisplayNameFor(model => model.ReceiverAddress)
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.ReceiverAddress)
+        </dd>
+        <dt class="col-sm-3">
+            @Html.DisplayNameFor(model => model.Weight)
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.Weight)
+        </dd>
+        <dt class="col-sm-3">
+            @Html.DisplayNameFor(model => model.PickupDate)
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.PickupDate)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Index" class="btn btn-secondary">Вернуться к списку</a>
+</div>
